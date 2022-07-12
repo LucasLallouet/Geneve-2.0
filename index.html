@@ -8,9 +8,8 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="css/filter.css">
-<link rel="stylesheet" href="css/nouislider.min.css">
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         #map {
             width: 1089px;
@@ -24,6 +23,7 @@
         </div>
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -32,31 +32,45 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
-        <script src="js/tailDT.js"></script>
-<script src="js/nouislider.min.js"></script>
-<script src="js/wNumb.js"></script>
+        <script src="js/leaflet-measure.js"></script>
         <script src="data/perimetre100km_1.js"></script>
         <script src="data/AGGLO_PERIMETRE_AVEC_LAC_2.js"></script>
-        <script src="data/Jardinssurlestoits_3.js"></script>
-        <script src="data/Pointsdeventesemences_4.js"></script>
-        <script src="data/Traiteurs_5.js"></script>
-        <script src="data/AMAP_6.js"></script>
-        <script src="data/Marchsdeproducteurs_7.js"></script>
-        <script src="data/Magasinsdeproducteurs_8.js"></script>
-        <script src="data/Petitscommerces_9.js"></script>
-        <script src="data/Commercesbiologiques_10.js"></script>
-        <script src="data/Epiceries_11.js"></script>
-        <script src="data/Elevages_12.js"></script>
-        <script src="data/Domainesviticoles_13.js"></script>
-        <script src="data/Fermes_14.js"></script>
+        <script src="data/ArrtsdebustramsRER_3.js"></script>
+        <script src="data/Parkingrelais_4.js"></script>
+        <script src="data/Voiescirculationpourvlo_5.js"></script>
+        <script src="data/LignesdebustramsRER_6.js"></script>
+        <script src="data/Jardinssurlestoits_7.js"></script>
+        <script src="data/Pointsdeventesemences_8.js"></script>
+        <script src="data/Traiteurs_9.js"></script>
+        <script src="data/AMAP_10.js"></script>
+        <script src="data/Marchsdeproducteurs_11.js"></script>
+        <script src="data/Magasinsdeproducteurs_12.js"></script>
+        <script src="data/Petitscommerces_13.js"></script>
+        <script src="data/Commercesbiologiques_14.js"></script>
+        <script src="data/Epiceries_15.js"></script>
+        <script src="data/Elevages_16.js"></script>
+        <script src="data/Domainesviticoles_17.js"></script>
+        <script src="data/Fermes_18.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[46.08579494240379,5.8383660795111805],[46.35847858721203,6.337108001448563]]);
+        }).fitBounds([[46.107762214742145,5.938146904206072],[46.312320268544866,6.312203345656071]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
@@ -133,12 +147,152 @@
         });
         bounds_group.addLayer(layer_AGGLO_PERIMETRE_AVEC_LAC_2);
         map.addLayer(layer_AGGLO_PERIMETRE_AVEC_LAC_2);
-        function pop_Jardinssurlestoits_3(feature, layer) {
+        function pop_ArrtsdebustramsRER_3(feature, layer) {
         }
 
-        function style_Jardinssurlestoits_3_0() {
+        function style_ArrtsdebustramsRER_3_0() {
             return {
-                pane: 'pane_Jardinssurlestoits_3',
+                pane: 'pane_ArrtsdebustramsRER_3',
+                shape: 'triangle',
+                radius: 3.999999999999997,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(190,190,190,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_ArrtsdebustramsRER_3');
+        map.getPane('pane_ArrtsdebustramsRER_3').style.zIndex = 403;
+        map.getPane('pane_ArrtsdebustramsRER_3').style['mix-blend-mode'] = 'normal';
+        var layer_ArrtsdebustramsRER_3 = new L.geoJson(json_ArrtsdebustramsRER_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ArrtsdebustramsRER_3',
+            layerName: 'layer_ArrtsdebustramsRER_3',
+            pane: 'pane_ArrtsdebustramsRER_3',
+            onEachFeature: pop_ArrtsdebustramsRER_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_ArrtsdebustramsRER_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_ArrtsdebustramsRER_3);
+        map.addLayer(layer_ArrtsdebustramsRER_3);
+        function pop_Parkingrelais_4(feature, layer) {
+        }
+
+        function style_Parkingrelais_4_0() {
+            return {
+                pane: 'pane_Parkingrelais_4',
+                shape: 'diamond',
+                radius: 3.999999999999997,
+                opacity: 1,
+                color: 'rgba(120,120,120,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(120,120,120,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Parkingrelais_4');
+        map.getPane('pane_Parkingrelais_4').style.zIndex = 404;
+        map.getPane('pane_Parkingrelais_4').style['mix-blend-mode'] = 'normal';
+        var layer_Parkingrelais_4 = new L.geoJson(json_Parkingrelais_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Parkingrelais_4',
+            layerName: 'layer_Parkingrelais_4',
+            pane: 'pane_Parkingrelais_4',
+            onEachFeature: pop_Parkingrelais_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_Parkingrelais_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Parkingrelais_4);
+        map.addLayer(layer_Parkingrelais_4);
+        function pop_Voiescirculationpourvlo_5(feature, layer) {
+        }
+
+        function style_Voiescirculationpourvlo_5_0() {
+            return {
+                pane: 'pane_Voiescirculationpourvlo_5',
+                opacity: 1,
+                color: 'rgba(84,176,74,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Voiescirculationpourvlo_5');
+        map.getPane('pane_Voiescirculationpourvlo_5').style.zIndex = 405;
+        map.getPane('pane_Voiescirculationpourvlo_5').style['mix-blend-mode'] = 'normal';
+        var layer_Voiescirculationpourvlo_5 = new L.geoJson(json_Voiescirculationpourvlo_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Voiescirculationpourvlo_5',
+            layerName: 'layer_Voiescirculationpourvlo_5',
+            pane: 'pane_Voiescirculationpourvlo_5',
+            onEachFeature: pop_Voiescirculationpourvlo_5,
+            style: style_Voiescirculationpourvlo_5_0,
+        });
+        bounds_group.addLayer(layer_Voiescirculationpourvlo_5);
+        map.addLayer(layer_Voiescirculationpourvlo_5);
+        function pop_LignesdebustramsRER_6(feature, layer) {
+        }
+
+        function style_LignesdebustramsRER_6_0() {
+            return {
+                pane: 'pane_LignesdebustramsRER_6',
+                opacity: 1,
+                color: 'rgba(125,139,143,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_LignesdebustramsRER_6');
+        map.getPane('pane_LignesdebustramsRER_6').style.zIndex = 406;
+        map.getPane('pane_LignesdebustramsRER_6').style['mix-blend-mode'] = 'normal';
+        var layer_LignesdebustramsRER_6 = new L.geoJson(json_LignesdebustramsRER_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LignesdebustramsRER_6',
+            layerName: 'layer_LignesdebustramsRER_6',
+            pane: 'pane_LignesdebustramsRER_6',
+            onEachFeature: pop_LignesdebustramsRER_6,
+            style: style_LignesdebustramsRER_6_0,
+        });
+        bounds_group.addLayer(layer_LignesdebustramsRER_6);
+        map.addLayer(layer_LignesdebustramsRER_6);
+        function pop_Jardinssurlestoits_7(feature, layer) {
+        }
+
+        function style_Jardinssurlestoits_7_0() {
+            return {
+                pane: 'pane_Jardinssurlestoits_7',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -152,32 +306,32 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Jardinssurlestoits_3');
-        map.getPane('pane_Jardinssurlestoits_3').style.zIndex = 403;
-        map.getPane('pane_Jardinssurlestoits_3').style['mix-blend-mode'] = 'normal';
-        var layer_Jardinssurlestoits_3 = new L.geoJson(json_Jardinssurlestoits_3, {
+        map.createPane('pane_Jardinssurlestoits_7');
+        map.getPane('pane_Jardinssurlestoits_7').style.zIndex = 407;
+        map.getPane('pane_Jardinssurlestoits_7').style['mix-blend-mode'] = 'normal';
+        var layer_Jardinssurlestoits_7 = new L.geoJson(json_Jardinssurlestoits_7, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Jardinssurlestoits_3',
-            layerName: 'layer_Jardinssurlestoits_3',
-            pane: 'pane_Jardinssurlestoits_3',
-            onEachFeature: pop_Jardinssurlestoits_3,
+            dataVar: 'json_Jardinssurlestoits_7',
+            layerName: 'layer_Jardinssurlestoits_7',
+            pane: 'pane_Jardinssurlestoits_7',
+            onEachFeature: pop_Jardinssurlestoits_7,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Jardinssurlestoits_3_0(feature));
+                return L.circleMarker(latlng, style_Jardinssurlestoits_7_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Jardinssurlestoits_3);
-        map.addLayer(layer_Jardinssurlestoits_3);
-        function pop_Pointsdeventesemences_4(feature, layer) {
+        bounds_group.addLayer(layer_Jardinssurlestoits_7);
+        map.addLayer(layer_Jardinssurlestoits_7);
+        function pop_Pointsdeventesemences_8(feature, layer) {
         }
 
-        function style_Pointsdeventesemences_4_0() {
+        function style_Pointsdeventesemences_8_0() {
             return {
-                pane: 'pane_Pointsdeventesemences_4',
+                pane: 'pane_Pointsdeventesemences_8',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -191,32 +345,32 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Pointsdeventesemences_4');
-        map.getPane('pane_Pointsdeventesemences_4').style.zIndex = 404;
-        map.getPane('pane_Pointsdeventesemences_4').style['mix-blend-mode'] = 'normal';
-        var layer_Pointsdeventesemences_4 = new L.geoJson(json_Pointsdeventesemences_4, {
+        map.createPane('pane_Pointsdeventesemences_8');
+        map.getPane('pane_Pointsdeventesemences_8').style.zIndex = 408;
+        map.getPane('pane_Pointsdeventesemences_8').style['mix-blend-mode'] = 'normal';
+        var layer_Pointsdeventesemences_8 = new L.geoJson(json_Pointsdeventesemences_8, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Pointsdeventesemences_4',
-            layerName: 'layer_Pointsdeventesemences_4',
-            pane: 'pane_Pointsdeventesemences_4',
-            onEachFeature: pop_Pointsdeventesemences_4,
+            dataVar: 'json_Pointsdeventesemences_8',
+            layerName: 'layer_Pointsdeventesemences_8',
+            pane: 'pane_Pointsdeventesemences_8',
+            onEachFeature: pop_Pointsdeventesemences_8,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Pointsdeventesemences_4_0(feature));
+                return L.circleMarker(latlng, style_Pointsdeventesemences_8_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Pointsdeventesemences_4);
-        map.addLayer(layer_Pointsdeventesemences_4);
-        function pop_Traiteurs_5(feature, layer) {
+        bounds_group.addLayer(layer_Pointsdeventesemences_8);
+        map.addLayer(layer_Pointsdeventesemences_8);
+        function pop_Traiteurs_9(feature, layer) {
         }
 
-        function style_Traiteurs_5_0() {
+        function style_Traiteurs_9_0() {
             return {
-                pane: 'pane_Traiteurs_5',
+                pane: 'pane_Traiteurs_9',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -230,32 +384,32 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Traiteurs_5');
-        map.getPane('pane_Traiteurs_5').style.zIndex = 405;
-        map.getPane('pane_Traiteurs_5').style['mix-blend-mode'] = 'normal';
-        var layer_Traiteurs_5 = new L.geoJson(json_Traiteurs_5, {
+        map.createPane('pane_Traiteurs_9');
+        map.getPane('pane_Traiteurs_9').style.zIndex = 409;
+        map.getPane('pane_Traiteurs_9').style['mix-blend-mode'] = 'normal';
+        var layer_Traiteurs_9 = new L.geoJson(json_Traiteurs_9, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Traiteurs_5',
-            layerName: 'layer_Traiteurs_5',
-            pane: 'pane_Traiteurs_5',
-            onEachFeature: pop_Traiteurs_5,
+            dataVar: 'json_Traiteurs_9',
+            layerName: 'layer_Traiteurs_9',
+            pane: 'pane_Traiteurs_9',
+            onEachFeature: pop_Traiteurs_9,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Traiteurs_5_0(feature));
+                return L.circleMarker(latlng, style_Traiteurs_9_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Traiteurs_5);
-        map.addLayer(layer_Traiteurs_5);
-        function pop_AMAP_6(feature, layer) {
+        bounds_group.addLayer(layer_Traiteurs_9);
+        map.addLayer(layer_Traiteurs_9);
+        function pop_AMAP_10(feature, layer) {
         }
 
-        function style_AMAP_6_0() {
+        function style_AMAP_10_0() {
             return {
-                pane: 'pane_AMAP_6',
+                pane: 'pane_AMAP_10',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -269,32 +423,32 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_AMAP_6');
-        map.getPane('pane_AMAP_6').style.zIndex = 406;
-        map.getPane('pane_AMAP_6').style['mix-blend-mode'] = 'normal';
-        var layer_AMAP_6 = new L.geoJson(json_AMAP_6, {
+        map.createPane('pane_AMAP_10');
+        map.getPane('pane_AMAP_10').style.zIndex = 410;
+        map.getPane('pane_AMAP_10').style['mix-blend-mode'] = 'normal';
+        var layer_AMAP_10 = new L.geoJson(json_AMAP_10, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_AMAP_6',
-            layerName: 'layer_AMAP_6',
-            pane: 'pane_AMAP_6',
-            onEachFeature: pop_AMAP_6,
+            dataVar: 'json_AMAP_10',
+            layerName: 'layer_AMAP_10',
+            pane: 'pane_AMAP_10',
+            onEachFeature: pop_AMAP_10,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_AMAP_6_0(feature));
+                return L.circleMarker(latlng, style_AMAP_10_0(feature));
             },
         });
-        bounds_group.addLayer(layer_AMAP_6);
-        map.addLayer(layer_AMAP_6);
-        function pop_Marchsdeproducteurs_7(feature, layer) {
+        bounds_group.addLayer(layer_AMAP_10);
+        map.addLayer(layer_AMAP_10);
+        function pop_Marchsdeproducteurs_11(feature, layer) {
         }
 
-        function style_Marchsdeproducteurs_7_0() {
+        function style_Marchsdeproducteurs_11_0() {
             return {
-                pane: 'pane_Marchsdeproducteurs_7',
+                pane: 'pane_Marchsdeproducteurs_11',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -308,32 +462,32 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Marchsdeproducteurs_7');
-        map.getPane('pane_Marchsdeproducteurs_7').style.zIndex = 407;
-        map.getPane('pane_Marchsdeproducteurs_7').style['mix-blend-mode'] = 'normal';
-        var layer_Marchsdeproducteurs_7 = new L.geoJson(json_Marchsdeproducteurs_7, {
+        map.createPane('pane_Marchsdeproducteurs_11');
+        map.getPane('pane_Marchsdeproducteurs_11').style.zIndex = 411;
+        map.getPane('pane_Marchsdeproducteurs_11').style['mix-blend-mode'] = 'normal';
+        var layer_Marchsdeproducteurs_11 = new L.geoJson(json_Marchsdeproducteurs_11, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Marchsdeproducteurs_7',
-            layerName: 'layer_Marchsdeproducteurs_7',
-            pane: 'pane_Marchsdeproducteurs_7',
-            onEachFeature: pop_Marchsdeproducteurs_7,
+            dataVar: 'json_Marchsdeproducteurs_11',
+            layerName: 'layer_Marchsdeproducteurs_11',
+            pane: 'pane_Marchsdeproducteurs_11',
+            onEachFeature: pop_Marchsdeproducteurs_11,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Marchsdeproducteurs_7_0(feature));
+                return L.circleMarker(latlng, style_Marchsdeproducteurs_11_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Marchsdeproducteurs_7);
-        map.addLayer(layer_Marchsdeproducteurs_7);
-        function pop_Magasinsdeproducteurs_8(feature, layer) {
+        bounds_group.addLayer(layer_Marchsdeproducteurs_11);
+        map.addLayer(layer_Marchsdeproducteurs_11);
+        function pop_Magasinsdeproducteurs_12(feature, layer) {
         }
 
-        function style_Magasinsdeproducteurs_8_0() {
+        function style_Magasinsdeproducteurs_12_0() {
             return {
-                pane: 'pane_Magasinsdeproducteurs_8',
+                pane: 'pane_Magasinsdeproducteurs_12',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -347,32 +501,32 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Magasinsdeproducteurs_8');
-        map.getPane('pane_Magasinsdeproducteurs_8').style.zIndex = 408;
-        map.getPane('pane_Magasinsdeproducteurs_8').style['mix-blend-mode'] = 'normal';
-        var layer_Magasinsdeproducteurs_8 = new L.geoJson(json_Magasinsdeproducteurs_8, {
+        map.createPane('pane_Magasinsdeproducteurs_12');
+        map.getPane('pane_Magasinsdeproducteurs_12').style.zIndex = 412;
+        map.getPane('pane_Magasinsdeproducteurs_12').style['mix-blend-mode'] = 'normal';
+        var layer_Magasinsdeproducteurs_12 = new L.geoJson(json_Magasinsdeproducteurs_12, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Magasinsdeproducteurs_8',
-            layerName: 'layer_Magasinsdeproducteurs_8',
-            pane: 'pane_Magasinsdeproducteurs_8',
-            onEachFeature: pop_Magasinsdeproducteurs_8,
+            dataVar: 'json_Magasinsdeproducteurs_12',
+            layerName: 'layer_Magasinsdeproducteurs_12',
+            pane: 'pane_Magasinsdeproducteurs_12',
+            onEachFeature: pop_Magasinsdeproducteurs_12,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Magasinsdeproducteurs_8_0(feature));
+                return L.circleMarker(latlng, style_Magasinsdeproducteurs_12_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Magasinsdeproducteurs_8);
-        map.addLayer(layer_Magasinsdeproducteurs_8);
-        function pop_Petitscommerces_9(feature, layer) {
+        bounds_group.addLayer(layer_Magasinsdeproducteurs_12);
+        map.addLayer(layer_Magasinsdeproducteurs_12);
+        function pop_Petitscommerces_13(feature, layer) {
         }
 
-        function style_Petitscommerces_9_0() {
+        function style_Petitscommerces_13_0() {
             return {
-                pane: 'pane_Petitscommerces_9',
+                pane: 'pane_Petitscommerces_13',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -386,32 +540,32 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Petitscommerces_9');
-        map.getPane('pane_Petitscommerces_9').style.zIndex = 409;
-        map.getPane('pane_Petitscommerces_9').style['mix-blend-mode'] = 'normal';
-        var layer_Petitscommerces_9 = new L.geoJson(json_Petitscommerces_9, {
+        map.createPane('pane_Petitscommerces_13');
+        map.getPane('pane_Petitscommerces_13').style.zIndex = 413;
+        map.getPane('pane_Petitscommerces_13').style['mix-blend-mode'] = 'normal';
+        var layer_Petitscommerces_13 = new L.geoJson(json_Petitscommerces_13, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Petitscommerces_9',
-            layerName: 'layer_Petitscommerces_9',
-            pane: 'pane_Petitscommerces_9',
-            onEachFeature: pop_Petitscommerces_9,
+            dataVar: 'json_Petitscommerces_13',
+            layerName: 'layer_Petitscommerces_13',
+            pane: 'pane_Petitscommerces_13',
+            onEachFeature: pop_Petitscommerces_13,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Petitscommerces_9_0(feature));
+                return L.circleMarker(latlng, style_Petitscommerces_13_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Petitscommerces_9);
-        map.addLayer(layer_Petitscommerces_9);
-        function pop_Commercesbiologiques_10(feature, layer) {
+        bounds_group.addLayer(layer_Petitscommerces_13);
+        map.addLayer(layer_Petitscommerces_13);
+        function pop_Commercesbiologiques_14(feature, layer) {
         }
 
-        function style_Commercesbiologiques_10_0() {
+        function style_Commercesbiologiques_14_0() {
             return {
-                pane: 'pane_Commercesbiologiques_10',
+                pane: 'pane_Commercesbiologiques_14',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -425,32 +579,32 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Commercesbiologiques_10');
-        map.getPane('pane_Commercesbiologiques_10').style.zIndex = 410;
-        map.getPane('pane_Commercesbiologiques_10').style['mix-blend-mode'] = 'normal';
-        var layer_Commercesbiologiques_10 = new L.geoJson(json_Commercesbiologiques_10, {
+        map.createPane('pane_Commercesbiologiques_14');
+        map.getPane('pane_Commercesbiologiques_14').style.zIndex = 414;
+        map.getPane('pane_Commercesbiologiques_14').style['mix-blend-mode'] = 'normal';
+        var layer_Commercesbiologiques_14 = new L.geoJson(json_Commercesbiologiques_14, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Commercesbiologiques_10',
-            layerName: 'layer_Commercesbiologiques_10',
-            pane: 'pane_Commercesbiologiques_10',
-            onEachFeature: pop_Commercesbiologiques_10,
+            dataVar: 'json_Commercesbiologiques_14',
+            layerName: 'layer_Commercesbiologiques_14',
+            pane: 'pane_Commercesbiologiques_14',
+            onEachFeature: pop_Commercesbiologiques_14,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Commercesbiologiques_10_0(feature));
+                return L.circleMarker(latlng, style_Commercesbiologiques_14_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Commercesbiologiques_10);
-        map.addLayer(layer_Commercesbiologiques_10);
-        function pop_Epiceries_11(feature, layer) {
+        bounds_group.addLayer(layer_Commercesbiologiques_14);
+        map.addLayer(layer_Commercesbiologiques_14);
+        function pop_Epiceries_15(feature, layer) {
         }
 
-        function style_Epiceries_11_0() {
+        function style_Epiceries_15_0() {
             return {
-                pane: 'pane_Epiceries_11',
+                pane: 'pane_Epiceries_15',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -464,32 +618,32 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Epiceries_11');
-        map.getPane('pane_Epiceries_11').style.zIndex = 411;
-        map.getPane('pane_Epiceries_11').style['mix-blend-mode'] = 'normal';
-        var layer_Epiceries_11 = new L.geoJson(json_Epiceries_11, {
+        map.createPane('pane_Epiceries_15');
+        map.getPane('pane_Epiceries_15').style.zIndex = 415;
+        map.getPane('pane_Epiceries_15').style['mix-blend-mode'] = 'normal';
+        var layer_Epiceries_15 = new L.geoJson(json_Epiceries_15, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Epiceries_11',
-            layerName: 'layer_Epiceries_11',
-            pane: 'pane_Epiceries_11',
-            onEachFeature: pop_Epiceries_11,
+            dataVar: 'json_Epiceries_15',
+            layerName: 'layer_Epiceries_15',
+            pane: 'pane_Epiceries_15',
+            onEachFeature: pop_Epiceries_15,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Epiceries_11_0(feature));
+                return L.circleMarker(latlng, style_Epiceries_15_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Epiceries_11);
-        map.addLayer(layer_Epiceries_11);
-        function pop_Elevages_12(feature, layer) {
+        bounds_group.addLayer(layer_Epiceries_15);
+        map.addLayer(layer_Epiceries_15);
+        function pop_Elevages_16(feature, layer) {
         }
 
-        function style_Elevages_12_0() {
+        function style_Elevages_16_0() {
             return {
-                pane: 'pane_Elevages_12',
+                pane: 'pane_Elevages_16',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -503,32 +657,32 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Elevages_12');
-        map.getPane('pane_Elevages_12').style.zIndex = 412;
-        map.getPane('pane_Elevages_12').style['mix-blend-mode'] = 'normal';
-        var layer_Elevages_12 = new L.geoJson(json_Elevages_12, {
+        map.createPane('pane_Elevages_16');
+        map.getPane('pane_Elevages_16').style.zIndex = 416;
+        map.getPane('pane_Elevages_16').style['mix-blend-mode'] = 'normal';
+        var layer_Elevages_16 = new L.geoJson(json_Elevages_16, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Elevages_12',
-            layerName: 'layer_Elevages_12',
-            pane: 'pane_Elevages_12',
-            onEachFeature: pop_Elevages_12,
+            dataVar: 'json_Elevages_16',
+            layerName: 'layer_Elevages_16',
+            pane: 'pane_Elevages_16',
+            onEachFeature: pop_Elevages_16,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Elevages_12_0(feature));
+                return L.circleMarker(latlng, style_Elevages_16_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Elevages_12);
-        map.addLayer(layer_Elevages_12);
-        function pop_Domainesviticoles_13(feature, layer) {
+        bounds_group.addLayer(layer_Elevages_16);
+        map.addLayer(layer_Elevages_16);
+        function pop_Domainesviticoles_17(feature, layer) {
         }
 
-        function style_Domainesviticoles_13_0() {
+        function style_Domainesviticoles_17_0() {
             return {
-                pane: 'pane_Domainesviticoles_13',
+                pane: 'pane_Domainesviticoles_17',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -542,32 +696,32 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Domainesviticoles_13');
-        map.getPane('pane_Domainesviticoles_13').style.zIndex = 413;
-        map.getPane('pane_Domainesviticoles_13').style['mix-blend-mode'] = 'normal';
-        var layer_Domainesviticoles_13 = new L.geoJson(json_Domainesviticoles_13, {
+        map.createPane('pane_Domainesviticoles_17');
+        map.getPane('pane_Domainesviticoles_17').style.zIndex = 417;
+        map.getPane('pane_Domainesviticoles_17').style['mix-blend-mode'] = 'normal';
+        var layer_Domainesviticoles_17 = new L.geoJson(json_Domainesviticoles_17, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Domainesviticoles_13',
-            layerName: 'layer_Domainesviticoles_13',
-            pane: 'pane_Domainesviticoles_13',
-            onEachFeature: pop_Domainesviticoles_13,
+            dataVar: 'json_Domainesviticoles_17',
+            layerName: 'layer_Domainesviticoles_17',
+            pane: 'pane_Domainesviticoles_17',
+            onEachFeature: pop_Domainesviticoles_17,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Domainesviticoles_13_0(feature));
+                return L.circleMarker(latlng, style_Domainesviticoles_17_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Domainesviticoles_13);
-        map.addLayer(layer_Domainesviticoles_13);
-        function pop_Fermes_14(feature, layer) {
+        bounds_group.addLayer(layer_Domainesviticoles_17);
+        map.addLayer(layer_Domainesviticoles_17);
+        function pop_Fermes_18(feature, layer) {
         }
 
-        function style_Fermes_14_0() {
+        function style_Fermes_18_0() {
             return {
-                pane: 'pane_Fermes_14',
+                pane: 'pane_Fermes_18',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -581,26 +735,26 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Fermes_14');
-        map.getPane('pane_Fermes_14').style.zIndex = 414;
-        map.getPane('pane_Fermes_14').style['mix-blend-mode'] = 'normal';
-        var layer_Fermes_14 = new L.geoJson(json_Fermes_14, {
+        map.createPane('pane_Fermes_18');
+        map.getPane('pane_Fermes_18').style.zIndex = 418;
+        map.getPane('pane_Fermes_18').style['mix-blend-mode'] = 'normal';
+        var layer_Fermes_18 = new L.geoJson(json_Fermes_18, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Fermes_14',
-            layerName: 'layer_Fermes_14',
-            pane: 'pane_Fermes_14',
-            onEachFeature: pop_Fermes_14,
+            dataVar: 'json_Fermes_18',
+            layerName: 'layer_Fermes_18',
+            pane: 'pane_Fermes_18',
+            onEachFeature: pop_Fermes_18,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Fermes_14_0(feature));
+                return L.circleMarker(latlng, style_Fermes_18_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Fermes_14);
-        map.addLayer(layer_Fermes_14);
+        bounds_group.addLayer(layer_Fermes_18);
+        map.addLayer(layer_Fermes_18);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
@@ -612,256 +766,18 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/Fermes_14.png" /> Fermes': layer_Fermes_14,'<img src="legend/Domainesviticoles_13.png" /> Domaines viticoles': layer_Domainesviticoles_13,'<img src="legend/Elevages_12.png" /> Elevages': layer_Elevages_12,'<img src="legend/Epiceries_11.png" /> Epiceries': layer_Epiceries_11,'<img src="legend/Commercesbiologiques_10.png" /> Commerces biologiques': layer_Commercesbiologiques_10,'<img src="legend/Petitscommerces_9.png" /> Petits commerces': layer_Petitscommerces_9,'<img src="legend/Magasinsdeproducteurs_8.png" /> Magasins de producteurs': layer_Magasinsdeproducteurs_8,'<img src="legend/Marchsdeproducteurs_7.png" /> Marchés de producteurs': layer_Marchsdeproducteurs_7,'<img src="legend/AMAP_6.png" /> AMAP': layer_AMAP_6,'<img src="legend/Traiteurs_5.png" /> Traiteurs': layer_Traiteurs_5,'<img src="legend/Pointsdeventesemences_4.png" /> Points de vente semences ': layer_Pointsdeventesemences_4,'<img src="legend/Jardinssurlestoits_3.png" /> Jardins sur les toits': layer_Jardinssurlestoits_3,'<img src="legend/AGGLO_PERIMETRE_AVEC_LAC_2.png" /> AGGLO_PERIMETRE_AVEC_LAC': layer_AGGLO_PERIMETRE_AVEC_LAC_2,'<img src="legend/perimetre100km_1.png" /> perimetre100km': layer_perimetre100km_1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/Fermes_18.png" /> Fermes': layer_Fermes_18,'<img src="legend/Domainesviticoles_17.png" /> Domaines viticoles': layer_Domainesviticoles_17,'<img src="legend/Elevages_16.png" /> Elevages': layer_Elevages_16,'<img src="legend/Epiceries_15.png" /> Epiceries': layer_Epiceries_15,'<img src="legend/Commercesbiologiques_14.png" /> Commerces biologiques': layer_Commercesbiologiques_14,'<img src="legend/Petitscommerces_13.png" /> Petits commerces': layer_Petitscommerces_13,'<img src="legend/Magasinsdeproducteurs_12.png" /> Magasins de producteurs': layer_Magasinsdeproducteurs_12,'<img src="legend/Marchsdeproducteurs_11.png" /> Marchés de producteurs': layer_Marchsdeproducteurs_11,'<img src="legend/AMAP_10.png" /> AMAP': layer_AMAP_10,'<img src="legend/Traiteurs_9.png" /> Traiteurs': layer_Traiteurs_9,'<img src="legend/Pointsdeventesemences_8.png" /> Points de vente semences ': layer_Pointsdeventesemences_8,'<img src="legend/Jardinssurlestoits_7.png" /> Jardins sur les toits': layer_Jardinssurlestoits_7,'<img src="legend/LignesdebustramsRER_6.png" /> Lignes de bus, trams, RER  ': layer_LignesdebustramsRER_6,'<img src="legend/Voiescirculationpourvlo_5.png" /> Voies circulation pour vélo ': layer_Voiescirculationpourvlo_5,'<img src="legend/Parkingrelais_4.png" /> Parking relais ': layer_Parkingrelais_4,'<img src="legend/ArrtsdebustramsRER_3.png" /> Arrêts de bus, trams, RER': layer_ArrtsdebustramsRER_3,'<img src="legend/AGGLO_PERIMETRE_AVEC_LAC_2.png" /> AGGLO_PERIMETRE_AVEC_LAC': layer_AGGLO_PERIMETRE_AVEC_LAC_2,'<img src="legend/perimetre100km_1.png" /> perimetre100km': layer_perimetre100km_1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:false}).addTo(map);
         setBounds();
-        var mapDiv = document.getElementById('map');
-        var row = document.createElement('div');
-        row.className="row";
-        row.id="all";
-        row.style.height = "100%";
-        var col1 = document.createElement('div');
-        col1.className="col9";
-        col1.id = "mapWindow";
-        col1.style.height = "99%";
-        col1.style.width = "80%";
-        col1.style.display = "inline-block";
-        var col2 = document.createElement('div');
-        col2.className="col3";
-        col2.id = "menu";
-        col2.style.display = "inline-block";
-        mapDiv.parentNode.insertBefore(row, mapDiv);
-        document.getElementById("all").appendChild(col1);
-        document.getElementById("all").appendChild(col2);
-        col1.appendChild(mapDiv)
-        var Filters = {"SHAPE_LEN": "real","fid": "real","ferme": "str","Types": "str"};
-        function filterFunc() {
-          map.eachLayer(function(lyr){
-          if ("options" in lyr && "dataVar" in lyr["options"]){
-            features = this[lyr["options"]["dataVar"]].features.slice(0);
-            try{
-              for (key in Filters){
-                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
-                if (Filters[key] == "str" || Filters[key] == "bool"){
-                  var selection = [];
-                  var options = document.getElementById("sel_" + keyS).options
-                  for (var i=0; i < options.length; i++) {
-                    if (options[i].selected) selection.push(options[i].value);
-                  }
-                    try{
-                      if (key in features[0].properties){
-                        for (i = features.length - 1;
-                          i >= 0; --i){
-                          if (selection.indexOf(
-                          features[i].properties[key])<0
-                          && selection.length>0) {
-                          features.splice(i,1);
-                          }
-                        }
-                      }
-                    } catch(err){
-                  }
-                }
-                if (Filters[key] == "int"){
-                  sliderVals =  document.getElementById(
-                    "div_" + keyS).noUiSlider.get();
-                  try{
-                    if (key in features[0].properties){
-                    for (i = features.length - 1; i >= 0; --i){
-                      if (parseInt(features[i].properties[key])
-                          < sliderVals[0]
-                          || parseInt(features[i].properties[key])
-                          > sliderVals[1]){
-                            features.splice(i,1);
-                          }
-                        }
-                      }
-                    } catch(err){
-                    }
-                  }
-                if (Filters[key] == "real"){
-                  sliderVals =  document.getElementById(
-                    "div_" + keyS).noUiSlider.get();
-                  try{
-                    if (key in features[0].properties){
-                    for (i = features.length - 1; i >= 0; --i){
-                      if (features[i].properties[key]
-                          < sliderVals[0]
-                          || features[i].properties[key]
-                          > sliderVals[1]){
-                            features.splice(i,1);
-                          }
-                        }
-                      }
-                    } catch(err){
-                    }
-                  }
-                if (Filters[key] == "date"
-                  || Filters[key] == "datetime"
-                  || Filters[key] == "time"){
-                  try{
-                    if (key in features[0].properties){
-                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
-                      startdate = document.getElementById("dat_" +
-                        HTMLkey + "_date1").value.replace(" ", "T");
-                      enddate = document.getElementById("dat_" +
-                        HTMLkey + "_date2").value.replace(" ", "T");
-                      for (i = features.length - 1; i >= 0; --i){
-                        if (features[i].properties[key] < startdate
-                          || features[i].properties[key] > enddate){
-                          features.splice(i,1);
-                        }
-                      }
-                    }
-                  } catch(err){
-                  }
-                }
-              }
-            } catch(err){
-            }
-          this[lyr["options"]["layerName"]].clearLayers();
-          this[lyr["options"]["layerName"]].addData(features);
-          }
-          })
-        }
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_SHAPE_LEN = document.createElement("div");
-            div_SHAPE_LEN.id = "div_SHAPE_LEN";
-            div_SHAPE_LEN.className = "slider";
-            document.getElementById("menu").appendChild(div_SHAPE_LEN);
-            var lab_SHAPE_LEN = document.createElement('div');
-            lab_SHAPE_LEN.innerHTML  = 'SHAPE_LEN: <span id="val_SHAPE_LEN"></span>';
-            lab_SHAPE_LEN.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_SHAPE_LEN);
-            var reset_SHAPE_LEN = document.createElement('div');
-            reset_SHAPE_LEN.innerHTML = 'clear filter';
-            reset_SHAPE_LEN.className = 'filterlabel';
-            lab_SHAPE_LEN.className = 'filterlabel';
-            reset_SHAPE_LEN.onclick = function() {
-                sel_SHAPE_LEN.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_SHAPE_LEN);
-            var sel_SHAPE_LEN = document.getElementById('div_SHAPE_LEN');
-            noUiSlider.create(sel_SHAPE_LEN, {
-                connect: true,
-                start: [6140.09850431, 370537.985684],
-                range: {
-                min: 6140.09850431,
-                max: 370537.985684
-                }
-            });
-            sel_SHAPE_LEN.noUiSlider.on('update', function (values) {
-            val_SHAPE_LEN = document.getElementById('val_SHAPE_LEN');
-            val_SHAPE_LEN.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_fid = document.createElement("div");
-            div_fid.id = "div_fid";
-            div_fid.className = "slider";
-            document.getElementById("menu").appendChild(div_fid);
-            var lab_fid = document.createElement('div');
-            lab_fid.innerHTML  = 'fid: <span id="val_fid"></span>';
-            lab_fid.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_fid);
-            var reset_fid = document.createElement('div');
-            reset_fid.innerHTML = 'clear filter';
-            reset_fid.className = 'filterlabel';
-            lab_fid.className = 'filterlabel';
-            reset_fid.onclick = function() {
-                sel_fid.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_fid);
-            var sel_fid = document.getElementById('div_fid');
-            noUiSlider.create(sel_fid, {
-                connect: true,
-                start: [1.0, 1.0],
-                range: {
-                min: 1.0,
-                max: 1.0
-                }
-            });
-            sel_fid.noUiSlider.on('update', function (values) {
-            val_fid = document.getElementById('val_fid');
-            val_fid.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_ferme = document.createElement('div');
-            div_ferme.id = "div_ferme";
-            div_ferme.className= "filterselect";
-            document.getElementById("menu").appendChild(div_ferme);
-            sel_ferme = document.createElement('select');
-            sel_ferme.multiple = true;
-            sel_ferme.size = 10;
-            sel_ferme.id = "sel_ferme";
-            var ferme_options_str = "<option value='' unselected></option>";
-            sel_ferme.onchange = function(){filterFunc()};
-            ferme_options_str  += '<option value="Restaurant et �picerie">Restaurant et �picerie</option>';
-            ferme_options_str  += '<option value="amap">amap</option>';
-            ferme_options_str  += '<option value="commerce biologique">commerce biologique</option>';
-            ferme_options_str  += '<option value="domaine viticole">domaine viticole</option>';
-            ferme_options_str  += '<option value="ferme">ferme</option>';
-            ferme_options_str  += '<option value="ferme et march�">ferme et march�</option>';
-            ferme_options_str  += '<option value="magasin de producteurs">magasin de producteurs</option>';
-            ferme_options_str  += '<option value="march�">march�</option>';
-            ferme_options_str  += '<option value="march� de producteurs">march� de producteurs</option>';
-            ferme_options_str  += '<option value="petit commerce">petit commerce</option>';
-            ferme_options_str  += '<option value="traiteur">traiteur</option>';
-            ferme_options_str  += '<option value="�levage">�levage</option>';
-            ferme_options_str  += '<option value="�picerie">�picerie</option>';
-            ferme_options_str  += '<option value="�picerie biologique">�picerie biologique</option>';
-            ferme_options_str  += '<option value="�picerie coop�rative">�picerie coop�rative</option>';
-            ferme_options_str  += '<option value="�picerie �coresponsable">�picerie �coresponsable</option>';
-            sel_ferme.innerHTML = ferme_options_str;
-            div_ferme.appendChild(sel_ferme);
-            var lab_ferme = document.createElement('div');
-            lab_ferme.innerHTML = 'ferme';
-            lab_ferme.className = 'filterlabel';
-            div_ferme.appendChild(lab_ferme);
-            var reset_ferme = document.createElement('div');
-            reset_ferme.innerHTML = 'clear filter';
-            reset_ferme.className = 'filterlabel';
-            reset_ferme.onclick = function() {
-                var options = document.getElementById("sel_ferme").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_ferme.appendChild(reset_ferme);
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_Types = document.createElement('div');
-            div_Types.id = "div_Types";
-            div_Types.className= "filterselect";
-            document.getElementById("menu").appendChild(div_Types);
-            sel_Types = document.createElement('select');
-            sel_Types.multiple = true;
-            sel_Types.size = 1;
-            sel_Types.id = "sel_Types";
-            var Types_options_str = "<option value='' unselected></option>";
-            sel_Types.onchange = function(){filterFunc()};
-            Types_options_str  += '<option value="Jardins sur les toits ">Jardins sur les toits </option>';
-            sel_Types.innerHTML = Types_options_str;
-            div_Types.appendChild(sel_Types);
-            var lab_Types = document.createElement('div');
-            lab_Types.innerHTML = 'Types';
-            lab_Types.className = 'filterlabel';
-            div_Types.appendChild(lab_Types);
-            var reset_Types = document.createElement('div');
-            reset_Types.innerHTML = 'clear filter';
-            reset_Types.className = 'filterlabel';
-            reset_Types.onclick = function() {
-                var options = document.getElementById("sel_Types").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_Types.appendChild(reset_Types);
+        resetLabels([layer_Fermes_18]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Fermes_18]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Fermes_18]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Fermes_18]);
+        });
         </script>
     </body>
 </html>
